@@ -28,10 +28,35 @@
 ## Output @var{c} will be a matrix prod(size(m))
 #
 ## As described in Image Processing: The Fundamentals 
-## by Maria Petrou and Panagiota Bosdogianni
+## by Maria Petrou and Panagiota Bosdogianni, pp 98.
 ##
 ## WARNING: Outputs probably don't have the form you expect!
 ##
+## Output will have the form:
+## @group
+## A B C D E F G H I
+## B A B J D E K G H
+## C B A L J D M K G
+## D J L A B C D E F
+## E D J B A B J D E
+## F E D C B A L J D
+## G K M D J L A B C
+## H G K E D J B A B
+## I H G F E D C B A
+## A = average squared element
+## B = average product of vertical neighbours
+## C = average product of vertical neighbours once removed
+## D = average product of horizontal neighbours
+## E = average product of diagonal neighbours
+## F = average procuct of values with vertical distance of 2, horizontal 1
+## G = average product of values with horizontal removal of 2
+## H = average product of values with horizontal removal of 2, vertical 1
+## I = average product of diagonal neighbours once removed
+## J = average product of off-diagonal neighbours
+## K = average product of values with horizontal removal of 2, vertical -1
+## L = average product of values with horizontal removal of -1, vertical 2
+## M = values with off-diagonal neighbours once removed.
+## @end group
 ## @end deftypefn
 
 ## Author: Matt Foster <matt.p.foster@gmail.com>
