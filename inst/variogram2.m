@@ -139,3 +139,12 @@ endfunction
 function g = robust_median(nh)
 	g = median(sqrt(abs(nh))).^4./(0.457);
 endfunction
+
+# Demo
+%! a = -0.3 + 4*randn(120);
+%! f = fspecial('disk', 15);
+%! fa = filter2(f, a);
+%! op = strat(fa, 8);
+%! [vc, rc] = variogram2(op(:,1), op(:,2), op(:,3), [0, pi], 2.5, 1, 'c');
+%! [vr, rr] = variogram2(op(:,1), op(:,2), op(:,3), [0, pi], 2.5, 1, 'r');
+%! [vm, rm] = variogram2(op(:,1), op(:,2), op(:,3), [0, pi], 2.5, 1, 'm');
