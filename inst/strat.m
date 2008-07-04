@@ -18,8 +18,9 @@
 ## CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{ret}=} strat (@var{data})
+## @deftypefn {Function File} {@var{ret}=} strat (@var{data}, @var{rate})
 ## Sample 2-D input @var{data} using stratified sampling, with blocks of size @var{sz}. 
+## @var{ret} is an nx3 matrix, corresponing to @code{[row, col, val]}.
 ##
 ## Reference:
 ## @itemize
