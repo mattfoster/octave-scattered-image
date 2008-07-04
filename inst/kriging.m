@@ -42,16 +42,16 @@ function [zz, varargout] = kriging(xi, yi, zi, x, y)
 
 	tic;
 
-	% Create Variogram -- warning.. even this is slow!
+	# Create Variogram -- warning.. even this is slow!
 	[x1,x2] = meshgrid(xi);
 	[y1,y2] = meshgrid(yi);
 	[z1,z2] = meshgrid(zi);
 
-	% Calculate all lags.
+	# Calculate all lags.
 	D = sqrt((x1 - x2).^2 + (y1 - y2).^2);
 	D2 = D.*(diag(xi*NaN)+1);
 
-  % Calculate Semivaiances.
+  # Calculate Semivaiances.
 	G = 0.5*(z1 - z2).^2; 
 
 	lag = mean(min(D2));
@@ -67,25 +67,25 @@ function [zz, varargout] = kriging(xi, yi, zi, x, y)
 	endfor
 	lags=0:max(DE);
 
-	% Fit a spherical variogram model
+	# Fit a spherical variogram model
 	mod_func = fit_spherical(DE, GE, var(zi(:)));
 	model = mod_func(D);
 
-	% add zeros as the last row and col of the variogram model.
+	# add zeros as the last row and col of the variogram model.
 	n = length(xi);
 	model(:,n+1) = 1;
 	model(n+1,:) = 1;
-	% add a zero to the bottom right corner
+	# add a zero to the bottom right corner
 	model(n+1,n+1) = 0;
 
-	% Invert the variogram model
+	# Invert the variogram model
 	model_inv = inv(model);
 
-  % output matrices
+  # output matrices
 	zz = nan(size(x));
 	z_var = nan(size(x));
 
-	% Perform the Kriging
+	# Perform the Kriging
 	for k = 1:length(zz(:));
 		DOR = ((xi - x(k)).^2+(yi - y(k)).^2).^0.5;
 		G_R = mod_func(DOR);
@@ -123,14 +123,14 @@ endfunction
 
 function mod_func = fit_spherical(DE, GE, var_z)
 
-	% Only fit to the section below 90% of the variance
+	# Only fit to the section below 90% of the variance
 	ind = 1:min(find(GE > var_z * 0.9));
 	coef = [DE(ind);DE(ind).^3]' \ GE(ind)';
 	c = sqrt((-0.5 .* (1.5 ./ coef(1)).^-3)./coef(2));
 	a = 1.5 .* c / coef(1);
 
 	if isreal(a)
-		% Return an anonymous function that models the variogram
+		# Return an anonymous function that models the variogram
 		mod_func = @(h) (coef(1) .* h + coef(2) .* h.^3) .* (h <= a) ...
 		+ c.*ones(size(h)) .* (h > a);
 	else
