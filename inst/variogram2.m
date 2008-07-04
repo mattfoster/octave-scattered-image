@@ -75,30 +75,30 @@ function [v, dist] = variogram2(xx, yy, zz, ang_range, disp_range, m_ang, alg, f
 		end
 	end
 
-	% pairs = nchoosek(1:length(xx), 2);
-	% p1 = [xx(pairs(:,1)), yy(pairs(:,1))];
-	% p2 = [xx(pairs(:,2)), yy(pairs(:,2))];
+	# pairs = nchoosek(1:length(xx), 2);
+	# p1 = [xx(pairs(:,1)), yy(pairs(:,1))];
+	# p2 = [xx(pairs(:,2)), yy(pairs(:,2))];
 
 	[xp, yp] = meshgrid(1:length(xx));
 	pairs = [xp(:), yp(:)];
 	p1 = [xx(pairs(:,1)), yy(pairs(:,1))];
 	p2 = [xx(pairs(:,2)), yy(pairs(:,2))];
 
-	% Difference each pair to extract lag vectors:
+	# Difference each pair to extract lag vectors:
 	diff = p1 - p2;
 	xd = diff(:,1);
 	yd = diff(:,2);
-	% Find distances:
+	# Find distances:
 	[th, r] = cart2pol(xd, yd);
 
-	% Threshold angles:
+	# Threshold angles:
 	m_ang = 1;
 	if m_ang
 		th = mod(th, pi);
 	end
 	th_ind = find(th > ang_range(1) & th < ang_range(2));
 
-	% Threshold displacements
+	# Threshold displacements
 	th_r = [];
 	step = disp_range;
 	range = 1:ceil(max(r)./step);
@@ -118,24 +118,24 @@ function [v, dist] = variogram2(xx, yy, zz, ang_range, disp_range, m_ang, alg, f
 	end
 	
 endfunction
-% Subfunctions below are various variogram estimators:
+# Subfunctions below are various variogram estimators:
 
-% Classical estimator (Cressie, page: 69)
+# Classical estimator (Cressie, page: 69)
 function g = classical(nh)
 	g = mean(nh.^2);
 endfunction
 
-% Variance based estimator (Bad)
+# Variance based estimator (Bad)
 function g = var_est(nh)
 	g = var(nh);
 endfunction
 
-% Robust mean based estimator (Cressie, 75)
+# Robust mean based estimator (Cressie, 75)
 function g = robust_mean(nh)
 	g = mean(sqrt(abs(nh))).^4./(0.457+0.494./length(nh));
 endfunction
 
-% Robust median based estimator (Cressie, 75)
+# Robust median based estimator (Cressie, 75)
 function g = robust_median(nh)
 	g = median(sqrt(abs(nh))).^4./(0.457);
 endfunction

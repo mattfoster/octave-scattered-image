@@ -1,4 +1,13 @@
 scattered-image >> Scattered Image Analysis and Processing
 Interpolation
+	kriging
+	rbf
+	first_order_nc
 Analysis and Statistics
+	autocorr2
+  autocorrdist
+	variogram2
 Sampling
+Data Generation
+	corr_data
+	corr_data_uni
