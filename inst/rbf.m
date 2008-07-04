@@ -181,7 +181,7 @@ for ii = 1:length(xx(:))
     log_fudge);
 
   zz(ii) = sum(lam .* nm);
-end
+endfor
 
 # Add the polynomial
 zz = zz + poly;
@@ -212,28 +212,26 @@ endif
 endfunction # rbf 
 
 # Basis functions
-# mlint says these are never used.. it's wrong!
-
 
 # Poly is an integer detailing the order of polynomial to use.
 
 # Euclidean distance -- Linear basis function
-function [bf, poly] = euclidean(x1, x2, y1, y2, varargin) ##ok
+function [bf, poly] = euclidean(x1, x2, y1, y2, varargin) 
   bf = sqrt((x1 - x2).^2 + (y1 - y2).^2);
   poly = 1;
 endfunction
 
 # Thin plate spline 
-function [bf, poly] = thin_plate_spline(x1, x2, y1, y2, varargin) ##ok
+function [bf, poly] = thin_plate_spline(x1, x2, y1, y2, varargin) 
   rr = euclidean(x1, x2, y1, y2);
-  # Not 100% sure what base to use for the log.
+  % Not 100# sure what base to use for the log.
   bf = rr.^2 .* log(rr);
   bf(rr == 0) = varargin{1};
   poly = 1;
 endfunction
 
 # Gaussian
-function [bf, poly] = gaussian(x1, x2, y1, y2, varargin) ##ok
+function [bf, poly] = gaussian(x1, x2, y1, y2, varargin) 
   rr = euclidean(x1, x2, y1, y2);
   if nargin < 5
     aa = 1;
@@ -246,7 +244,7 @@ function [bf, poly] = gaussian(x1, x2, y1, y2, varargin) ##ok
 endfunction
 
 # Multiquadratic
-function [bf, poly] = multiquadratic(x1, x2, y1, y2, varargin) ##ok
+function [bf, poly] = multiquadratic(x1, x2, y1, y2, varargin) 
   rr = euclidean(x1, x2, y1, y2);
   if nargin < 5
     cc = 1;
@@ -258,7 +256,7 @@ function [bf, poly] = multiquadratic(x1, x2, y1, y2, varargin) ##ok
 endfunction
 
 # Triharmonic Spline -- C2 Continuity
-function [bf, poly] = triharmonic_spline(x1, x2, y1, y2, varargin) ##ok
+function [bf, poly] = triharmonic_spline(x1, x2, y1, y2, varargin)
   rr = euclidean(x1, x2, y1, y2);
   bf = rr.^4 .* log(rr);
   bf(rr == 0) = varargin{1};
