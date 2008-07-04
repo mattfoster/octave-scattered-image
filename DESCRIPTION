@@ -1,0 +1,12 @@
+Name: Scattered Image 
+Version: 1.0.0
+Date: 2008-04-29
+Author: Matt Foster
+Maintainer: Matt Foster <matt.p.foster@gmail.com>
+Title: Scattered Image Analysis and Processing
+Description: The scattered image package provides functions for the analysis
+and interpolation of 2-D scattered data.
+Depends: image (>= 1.0.6)
+Autoload: yes
+License: MIT
+Url: http://github.com/mattfoster/octave-scattered-image
