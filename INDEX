@@ -8,6 +8,8 @@ Analysis and Statistics
   autocorrdist
 	variogram2
 Sampling
+	strat
+	uniform
 Data Generation
 	corr_data
 	corr_data_uni
