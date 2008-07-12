@@ -80,10 +80,10 @@ for ii = pad:size(d,1)-pad-1
 end
 
 % Make the histogram look more like omre's
-c = abs(reallog(new));
+c = abs(log(new));
 
 endfunction
 
 %!demo
-% cor = corr_data_uni(100, 30);
-% surf(cor)
+%! cor = corr_data_uni(100, 30);
+%! surf(cor)
