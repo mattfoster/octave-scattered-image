@@ -56,3 +56,9 @@ c = filter2(f, a);
 
 c = c + abs(min(c(:)));
 c = c./max(c(:));
+
+endfunction
+
+%!demo
+% cor = corr_data(100, 30);
+% surf(cor) 

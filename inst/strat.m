@@ -45,12 +45,18 @@ function [ ret ] = strat ( data, sz )
 	indx = indx(:);
 	indy = indy(:);
 
-	ret = [indx, indy, fa(sub2ind(size(fa), indx, indy))];
+	ret = [indx, indy, data(sub2ind(size(data), indx, indy))];
 
 endfunction
 
-## demo
+%!demo
 %! a = -0.3 + 4*randn(120);
 %! f = fspecial('disk', 15);
 %! fa = filter2(f, a);
-%! samples = strat(fa);
+%! samples = strat(fa, 20);
+%! subplot(2, 1, 1)
+%! scatter3(samples(:,1), samples(:,2), samples(:,3))
+%! title('Random Stratified Sampling. Block size 20')
+%! subplot(2, 1, 2)
+%! plot(samples(:,1), samples(:,2), 'rx')
+%! axis equal

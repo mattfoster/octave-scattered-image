@@ -81,3 +81,9 @@ end
 
 % Make the histogram look more like omre's
 c = abs(reallog(new));
+
+endfunction
+
+%!demo
+% cor = corr_data_uni(100, 30);
+% surf(cor)

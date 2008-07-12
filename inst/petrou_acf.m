@@ -94,9 +94,10 @@ function c = petrou_acf(m)
 
 endfunction
 
-%!m = repmat([1,2,1], 3, 1);
-%!test_a = acf(m);
-%!correct = [
+%!test
+%! m = repmat([1,2,1], 3, 1);
+%! test_a = petrou_acf(m);
+%! correct = [
 %!    2.00000000000000e+000
 %!    1.33333333333333e+000
 %!    666.666666666667e-003
@@ -178,6 +179,5 @@ endfunction
 %!    666.666666666667e-003
 %!    1.33333333333333e+000
 %!    2.00000000000000e+000
-%!];
-%!
-%!assert(all(correct - test_a(:) < 1e-6));
+%! ];
+%! assert(all(correct - test_a(:) < 1e-6));
